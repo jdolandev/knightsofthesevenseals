@@ -14,4 +14,11 @@ iChest = None
 iLegs = None
 iShoes = None
 
-screen = pygame.screen.set_
+screen = pygame.display.set_mode((640,480),32,0)
+
+pygame.init()
+while True:
+	for event in pygame.event.get():
+		if event.type == QUIT:
+			exit()
+	pygame.display.update()

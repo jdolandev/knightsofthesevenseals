@@ -1,0 +1,20 @@
+
+
+# --------------
+# Please enter the commit message for your changes. Everything below
+# this paragraph is ignored, and an empty message aborts the commit.
+# Just close the window to accept your message.
+diff --git a/main.py b/main.py
+index 9280d20..0643d8b 100644
+--- a/main.py
++++ b/main.py
+@@ -1,7 +1,7 @@
+ import random
++import os, sys
++import pygame
+ 
+-print("Welcome to the quest game, the best text game ever!")
+-hero= input("What is your name?: ")
+ inventory=[]
+ dead= False
+ location = "town"
