@@ -17,6 +17,16 @@ iShoes = None
 def death():
 	print("You are dead.")
 	print("Game over")
+
+#Like DnD, very simple 
+def rolldice(difficulty):
+	print("You roll the dice...")
+	roll = random.randint(1,20)
+	print("You roll:",roll)
+	if(roll > difficulty):
+		pass
+	else:
+		print("You travel safely.")
 	
 #The choices for going to town
 def travel():
@@ -34,6 +44,8 @@ def travel():
 		location = "forest"
 	elif(whereto.lower() == "mountains"):
 		location = "mountains"
+		print("You travel to the mountains...")
+		rolldice(12)
 	else:
 		print("I don't understand")
 		mainloop()
