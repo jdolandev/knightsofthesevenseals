@@ -4,6 +4,7 @@ import time
 from item import *
 from enemy import *
 from battle import *
+from location import *
 
 logo = ["",
 		"		   |^^^|        __         _       __    __      ",
@@ -29,22 +30,18 @@ logo = ["",
 		"		     Y                                         	"]
 
 dead = False
-curLoc = ""
-_map = ["Town","Field","Cave","Mountain","Swamp",]
+curLoc = "Town"
+_map = ["Town","Field","Cave","Mountain","Swamp"]
+inventory = []
 
-slime = Enemy("slime","a slimy creature",20,10)
-slime.image = """
-        /\\
-      /    \\      
-    /        \\
-  /            \\
-/                \\
-|   (0)     (0)   |
-|       |  |      |
-\       \  /      /
- \   __________  /
-  \_____________/
 """
+Location details
+"""
+town = Location()
+town.name = "Town"
+town.description = "A quiet toww"
+town.options = ["Pub","Shop","Inn","Blacksmith","Travel"]
+
 def clr():
 	if os.name == 'nt':
 		os.system("cls")
@@ -76,7 +73,25 @@ def travel(location):
 def main():
 	while (dead == False):
 		whatDo = raw_input("What should you do?: ")
-		battle = Battle()
+		if(whatDo.lower() == "travel"):
+			whereTo = raw_input("Where do you wish to travel to?: ")
+			if any(whatDo in s for s in _map):
+				travel()
+			else:
+				print("That location does not exist.")
+		elif(whatDo.lower() == "options"):
+			if(curLoc == "Town"):
+				for i in xrange(0,len(town.options)):
+					print(town.options[i])
+		elif((whatDo.lower() == "exit") or (whatDo.lower == "quit")):
+			really = raw_input("Are you sure you want to exit? [y/n]: ")
+			if really.lower() == "y":
+				exit()
+			else:
+				print "Okay, cool."
+				main()
+		else:
+			print "I don't know how to", whatDo
 
 def init():
 	clr()
@@ -85,5 +100,6 @@ def init():
 		time.sleep(0.25)
 	pause()
 	clr()
+	print("You wake up in a town, ")
 	main()
 init()
