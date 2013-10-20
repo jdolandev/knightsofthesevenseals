@@ -1,35 +1,89 @@
 import random
-import os, sys
-import pygame
+import os
+import time
+from item import *
+from enemy import *
+from battle import *
+
+logo = ["",
+		"		   |^^^|        __         _       __    __      ",
+		"		    }_{        / /______  (_)___ _/ /_  / /______",
+		"		    }_{       / //_/ __ \/ / __ `/ __ \/ __/ ___/",
+		"		/|_/---\_|\  / ,< / / / / / /_/ / / / / /_(__  ) ",
+		"		I _|\_/|_ I /_/|_/_/ /_/_/\__, /_/ /_/\__/____/	",
+		"		\| |   | |/  ____  / __/  / /_/ /_  ___   		",
+		"		   |   |    / __ \/ /_   / __/ __ \/ _ \ 		",
+		"		   |   |   / /_/ / __/  / /_/ / / /  __/  		",
+		"		   |   |   \__________ _\________/____/ 		",
+		"		   |   |    / ___/ _ \ | / / _ \/ __ \  		",
+		"		   |   |   (__  )  __/ |/ /  __/ / / /			",
+		"		   |   |  /____/\___/|___/\___/// /_/			",
+		"		   |   |     ________  ____ _/ /____  			",
+		"		   |   |    / ___/ _ \/ __ `/ / ___/			",
+		"		   |   |   (__  )  __/ /_/ / (__  )				",
+		"		   |   |  /____/\___/\__,_/_/____/ 				",
+		"		   |   |      									",
+		"		   |   |  \033[93m---Created by Joe Dolan---\033[0m	",
+		"		   \   /										",
+		"		    \ /											",
+		"		     Y                                         	"]
+
+dead = False
+curLoc = ""
+_map = ["Town","Field","Cave","Mountain","Swamp",]
+
+slime = Enemy("slime","a slimy creature",20,10)
+slime.image = """
+        /\\
+      /    \\      
+    /        \\
+  /            \\
+/                \\
+|   (0)     (0)   |
+|       |  |      |
+\       \  /      /
+ \   __________  /
+  \_____________/
+"""
+def clr():
+	if os.name == 'nt':
+		os.system("cls")
+	else:
+		os.system("clear")
+def pause():
+	throwaway = raw_input("Press any key to continue...")
+	del(throwaway)
+
+"""Very similar to D&D, you roll the dice and hope for the best"""
+def rollDice(difficulty):
+	diceRoll = random.randint(1,20)
+	if diceRoll > difficulty:
+		return True #You were successful
+	else:
+		return False #You failed
+
+def _options():
+	for i in xrange(0,len(options)):
+		print(options[i])
+
+def travel(location):
+	if(rollDice(15) == True):
+		print("You successfully traveled to: ", location)
+		curLoc = location
+	else:
+		battle()
 
 def main():
-	#initialize screen
-	pygame.init()
-	screen = pygame.display.set_mode((150,50))
-	pygame.display.set_caption("Knights of the Seven Seals")
+	while (dead == False):
+		whatDo = raw_input("What should you do?: ")
+		battle = Battle()
 
-	#Background
-	background = pygame.Surface(screen.get_size())
-	background = background.convert()
-	background.fill((0,0,0))
-
-	#Display Text
-	font = pygame.font.Font(None,36)
-	text = font.render("Hello World!", 1,(10,10,10))
-	textpos = text.get_rect()
-	textpos.centerx = background.get_rect().centerx
-	background.blit(text,textpos)
-
-	#Blit everything to screen
-	screen.blit(background,(0,0))
-	pygame.disply.flip()
-
-	#Event loop
-	while 1:
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				exit()
-		screen.blit(background,(0,0))
-		pygame.display.flip
-
-if __name__=='__main__': main()
+def init():
+	clr()
+	for i in xrange(0,len(logo)):
+		print(logo[i])
+		time.sleep(0.25)
+	pause()
+	clr()
+	main()
+init()
