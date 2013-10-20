@@ -2,7 +2,6 @@ import random
 from enemy import *
 
 class Battle:
-	"""docstring for battle"""
 	def __init__(self):
 		probability = random.randint(0,100)
 		if (location = "Field"):
